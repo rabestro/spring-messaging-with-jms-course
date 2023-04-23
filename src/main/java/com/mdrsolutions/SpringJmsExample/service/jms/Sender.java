@@ -1,4 +1,4 @@
-package com.mdrsolutions.SpringJmsExample;
+package com.mdrsolutions.SpringJmsExample.service.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;

@@ -1,4 +1,4 @@
-package com.mdrsolutions.SpringJmsExample;
+package com.mdrsolutions.SpringJmsExample.service.jms;
 
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
