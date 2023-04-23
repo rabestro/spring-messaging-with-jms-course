@@ -22,6 +22,7 @@ public class Application {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 
+		System.out.println("Preparing to send a message");
 		jmsTemplate.convertAndSend("order-queue", "Hello");
 	}
 
