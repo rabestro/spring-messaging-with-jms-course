@@ -25,6 +25,14 @@ public class Application {
         sender.sendMessage("order-queue", "Hello");
 	}
 
+    @Bean
+    public JmsListenerContainerFactory warehouseFactory(ConnectionFactory factory, DefaultJmsListenerContainerFactoryConfigurer configurer){
+        DefaultJmsListenerContainerFactory containerFactory configurer =  new DefaultJmsListenerContainerFactory();
+        configurer.configure(containerFactory, factory);
+
+        return containerFactory;
+    }
+
     public ActiveMQConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("admin","admin","tcp://localhost:61616");
         return factory;
@@ -35,7 +43,12 @@ public class Application {
         return new JmsTemplate(connectionFactory());
     }
 
-
+    @Bean
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(){
+	    DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+	    factory.setConnectionFactory(connectionFactory());
+	    return factory;
+    }
 
 
 }
