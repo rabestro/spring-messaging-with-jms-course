@@ -11,9 +11,7 @@ import javax.jms.TextMessage;
 
 @Component
 public class BookOrderProcessingMessageListener implements MessageListener {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(BookOrderProcessingMessageListener.class);
-
     @Override
     public void onMessage(Message message) {
         try {
@@ -22,6 +20,6 @@ public class BookOrderProcessingMessageListener implements MessageListener {
         } catch (JMSException e) {
             e.printStackTrace();
         }
-    }
 
+    }
 }
