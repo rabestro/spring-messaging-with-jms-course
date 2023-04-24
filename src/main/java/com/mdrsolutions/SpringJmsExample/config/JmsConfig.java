@@ -50,7 +50,6 @@ public class JmsConfig {
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(){
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
-        //factory.setMessageConverter(jacksonJmsMessageConverter());
         factory.setMessageConverter(xmlMarshallingMessageConverter());
         return factory;
     }
