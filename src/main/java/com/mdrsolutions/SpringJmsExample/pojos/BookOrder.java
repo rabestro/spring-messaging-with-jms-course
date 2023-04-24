@@ -27,5 +27,14 @@ public class BookOrder {
     public Customer getCustomer() {
         return customer;
     }
+
+    @Override
+    public String toString() {
+        return "BookOrder{" +
+                "bookOrderId='" + bookOrderId + '\'' +
+                ", book=" + book +
+                ", customer=" + customer +
+                '}';
+    }
 }
 
