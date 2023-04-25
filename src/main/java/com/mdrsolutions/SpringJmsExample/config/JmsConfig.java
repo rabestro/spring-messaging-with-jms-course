@@ -1,16 +1,16 @@
 package com.mdrsolutions.SpringJmsExample.config;
 
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
-import org.springframework.jms.connection.SingleConnectionFactory;
+import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
-
 
 @EnableJms
 @Configuration
@@ -26,7 +26,7 @@ public class JmsConfig {
     private String password;
 
     @Bean
-    public MessageConverter jacksonJmsMessageConverter(){
+    public MessageConverter jacksonJmsMessageConverter() {
 
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
@@ -36,23 +36,22 @@ public class JmsConfig {
 
 
     @Bean
-    public SingleConnectionFactory connectionFactory(){
+    public CachingConnectionFactory connectionFactory() {
 
-        SingleConnectionFactory factory = new SingleConnectionFactory(
+        CachingConnectionFactory factory = new CachingConnectionFactory(
                 new ActiveMQConnectionFactory(user, password, brokerUrl)
         );
-        factory.setReconnectOnException(true);
         factory.setClientId("StoreFront");
+        factory.setSessionCacheSize(100);
         return factory;
     }
 
 
     @Bean
-    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory( ){
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
         factory.setMessageConverter(jacksonJmsMessageConverter());
-        //factory.setMessageConverter(xmlMarshallingMessageConverter());
         return factory;
     }
 
