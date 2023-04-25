@@ -19,6 +19,9 @@ public class WarehouseReceiver {
         LOGGER.info("Message received!");
         LOGGER.info("Message is == " + bookOrder);
 
+        if(bookOrder.getBook().getTitle().startsWith("L")){
+            throw new RuntimeException("bookOrderId=" + bookOrder.getBookOrderId() + " is of a book not allowed!");
+        }
         warehouseProcessingService.processOrder(bookOrder);
     }
 }
