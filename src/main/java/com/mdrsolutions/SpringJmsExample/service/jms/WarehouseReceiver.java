@@ -18,6 +18,7 @@ public class WarehouseReceiver {
     public void receive(BookOrder bookOrder){
         LOGGER.info("Message received!");
         LOGGER.info("Message is == " + bookOrder);
+
         warehouseProcessingService.processOrder(bookOrder);
     }
 }
