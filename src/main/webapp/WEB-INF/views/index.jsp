@@ -77,6 +77,13 @@ About
 </c:forEach>
 </select>
 <br/>
+<h4>Order Status</h4>
+<select class="form-control" id="orderStateId">
+<option value="NEW">NEW</option>
+<option value="UPDATE">UPDATE</option>
+<option value="DELETE">CANCEL</option>
+</select>
+<br/>
 <button class="btn btn-primary" id="addToOrderId" onclick="processOrder();" type="button">Add to Order</button>
 
 </div>
@@ -95,8 +102,9 @@ var randomStoreId = Math.floor(Math.random() * 100000);
 var randomOrderId = Math.floor(Math.random() * 100000);
 var bookId = $('#bookId').val();
 var customerId = $('#customerId').val();
+var orderStateId = $('#orderStateId').val();
 //alert(randomOrderId + " - " + customerId + " - " + bookId);
-jQuery.get('${pageContext.request.contextPath}/process/store/'+randomStoreId+'/order/'+randomOrderId+'/'+customerId+'/'+bookId+'/',
+jQuery.get('${pageContext.request.contextPath}/process/store/'+randomStoreId+'/order/'+randomOrderId+'/'+customerId+'/'+bookId+'/'+orderStateId+"/",
 function(data, status){
 $("#jmsMessageAlert").removeClass('hide');
 $("#jmsMessageAlert span").text(data);
