@@ -56,7 +56,6 @@ public class JmsConfig {
         return factory;
     }
 
-
     @Bean
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
